@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nyungwe Roast – Rwandan coffee, roasted weekly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E4EDEC; --surface:#F4F8F7; --ink:#14282B; --muted:#4A6064; --line:#B7C8C7;
+  --accent:#B3263E; --leaf:#3F7040; --on-accent:#fff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A1C; --surface:#172528; --ink:#E4EDEC; --muted:#9DB3B5; --line:#2C4245;
+    --accent:#E8566D; --leaf:#7DBB7E; --on-accent:#14282B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A1C; --surface:#172528; --ink:#E4EDEC; --muted:#9DB3B5; --line:#2C4245;
+  --accent:#E8566D; --leaf:#7DBB7E; --on-accent:#14282B; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.6 "Source Serif 4",Georgia,serif}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3,.sans{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:baseline;padding:1.25rem 0;border-bottom:1px solid var(--line)}
+header strong{font:800 1.25rem "Bricolage Grotesque",Arial,sans-serif}
+nav a{color:var(--ink);margin-left:1.25rem;text-decoration:none;font:500 1rem "Bricolage Grotesque",Arial,sans-serif}
+nav a:hover{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;padding:4rem 0;align-items:center}
+h1{font-size:clamp(2.6rem,7vw,5.2rem);line-height:.98;margin:0 0 1.25rem;font-weight:800;letter-spacing:-.03em}
+.hero p{max-width:34rem;color:var(--muted);margin:0}
+.timer{background:var(--surface);border:1px solid var(--line);border-radius:1.5rem;padding:1.75rem}
+.timer h2{margin:0 0 .25rem;font-size:1.1rem;font-weight:500}
+.clock{font:800 4.5rem/1 "Bricolage Grotesque",Arial,sans-serif;font-variant-numeric:tabular-nums;margin:.5rem 0}
+.step{min-height:3.2rem;color:var(--muted);margin:0 0 1rem}
+.bar{height:.6rem;border-radius:1rem;background:var(--line);overflow:hidden;margin-bottom:1.25rem}
+.bar i{display:block;height:100%;width:0;background:var(--leaf)}
+button{font:500 1rem "Bricolage Grotesque",Arial,sans-serif;border:0;border-radius:2rem;padding:.8rem 1.6rem;cursor:pointer;background:var(--accent);color:var(--on-accent)}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);margin-left:.5rem}
+section{padding:3rem 0;border-top:1px solid var(--line)}
+section>h2{font-size:2rem;margin:0 0 1.5rem;letter-spacing:-.02em}
+.row{display:grid;grid-template-columns:12rem 1fr auto;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+.row:last-child{border-bottom:0}
+.row h3{margin:0;font-size:1.3rem}
+.row p{margin:0;color:var(--muted)}
+.price{font:800 1.2rem "Bricolage Grotesque",Arial,sans-serif;white-space:nowrap}
+.story{columns:2 18rem;column-gap:3rem}
+.story p{margin:0 0 1rem}
+footer{padding:2.5rem 0;border-top:1px solid var(--line);color:var(--muted)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:2rem;padding:2.5rem 0}
+  .row{grid-template-columns:1fr;gap:.25rem}
+  nav a{margin-left:.9rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <strong>Nyungwe Roast</strong>
+    <nav><a href="#coffees">Coffees</a><a href="#story">Story</a><a href="#visit">Visit</a></nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Coffee grown above the clouds, roasted every Tuesday.</h1>
+      <p>We buy directly from smallholders around Nyungwe forest, roast in small batches in Kigali, and ship within two days of roasting.</p>
+    </div>
+    <div class="timer" aria-live="polite">
+      <h2>Pour-over timer</h2>
+      <div class="clock" id="clock">3:30</div>
+      <p class="step" id="step">15 g coffee, 250 g water at 94°C. Press start when you pour.</p>
+      <div class="bar"><i id="fill"></i></div>
+      <button id="go">Start brew</button><button class="ghost" id="reset">Reset</button>
+    </div>
+  </div>
+
+  <section id="coffees">
+    <h2>This week’s coffees</h2>
+    <div class="row"><h3>Gisakura</h3><p>Red plum, black tea and a long, clean finish. Washed, grown at 1,900 m.</p><span class="price">RWF 9,500</span></div>
+    <div class="row"><h3>Rugali Natural</h3><p>Dried mango and cocoa nibs. Sun-dried on raised beds for 24 days.</p><span class="price">RWF 11,000</span></div>
+    <div class="row"><h3>Kivu Dark</h3><p>Brown sugar, toasted almond, low acidity. Built for milk and for mornings.</p><span class="price">RWF 8,000</span></div>
+  </section>
+
+  <section id="story">
+    <h2>Why we do it this way</h2>
+    <div class="story">
+      <p>Rwandan coffee is mostly grown by families with a few hundred trees. When a roaster buys from them directly, the price they receive can be several times the commodity rate, and it arrives before the next planting season.</p>
+      <p>We keep our batches small so every roast gets full attention. Each bag is stamped with its roast date and the washing station where the cherries were processed, so you always know what is in your cup.</p>
+    </div>
+  </section>
+
+  <section id="visit">
+    <h2>Visit the roastery</h2>
+    <p>Open Tuesday to Saturday, 7:00 to 17:00, in Kigali. Come on Tuesday morning to smell the first roast of the week.</p>
+  </section>
+
+  <footer>© 2026 Nyungwe Roast. Brewed with patience.</footer>
+</div>
+
+<script>
+(function(){
+  var steps=[
+    {t:0,m:"Bloom: pour 50 g of water, wet all the grounds."},
+    {t:45,m:"Main pour: slowly circle up to 250 g total."},
+    {t:150,m:"Let it drain. Give the brewer a gentle swirl."},
+    {t:210,m:"Done. Pour, sip and let it cool a little."}
+  ], total=210, el=0, id=null;
+  var clock=document.getElementById("clock"), stepEl=document.getElementById("step"),
+      fill=document.getElementById("fill"), go=document.getElementById("go");
+  function fmt(s){var r=Math.max(0,total-s);return Math.floor(r/60)+":"+("0"+(r%60)).slice(-2)}
+  function draw(){
+    clock.textContent=fmt(el); fill.style.width=Math.min(100,el/total*100)+"%";
+    var cur=steps[0]; steps.forEach(function(s){if(el>=s.t)cur=s}); stepEl.textContent=cur.m;
+  }
+  function stop(){clearInterval(id);id=null;go.textContent="Start brew"}
+  go.addEventListener("click",function(){
+    if(id){stop();return}
+    if(el>=total)el=0;
+    go.textContent="Pause";
+    id=setInterval(function(){el++;draw();if(el>=total)stop()},1000);
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    stop();el=0;draw();stepEl.textContent="15 g coffee, 250 g water at 94°C. Press start when you pour.";
+  });
+})();
+</script>
+</body>
+</html>
